@@ -1,8 +1,10 @@
 package DataStruct;
 /*
-	在数据段对数据的定义
+	在数据段中一个数据声明中的一个数据项的定义
  */
 import java.util.*;
+
+import util.LogOutoutFactory;
 public class DataItem implements Iterable<Byte> { 
     
 	protected long startAddress;
@@ -53,17 +55,28 @@ public class DataItem implements Iterable<Byte> {
 
         for( Long v: immlist ) {
             long val = v.longValue();
+//            System.err.println(val);
             if( ( val & ( ~MASK ) ) != 0 ) {
                 String msg = "Value: " + val + " in data section label " + l;
                 msg += " is greater than " + bitcount + " bits wide.";
-                throw new Exception( msg );
+                LogOutoutFactory.append("(Error): "+msg+"\n");
+                throw new Exception( msg );           
             }
-
+            long shift = val;
+            ArrayList<Byte> buf = new ArrayList<Byte>();
             for( int i = 0 ; i < bitcount; i += 8 ) {
-                byte cur = (byte)(((val & MASK) >> i*8) & BYTEMASK);
-                data.add( cur );
+//                byte cur = (byte)(((val & MASK) >> i*8) & BYTEMASK);
+                byte cur = (byte)(((shift & MASK)) & BYTEMASK);
+                shift /= 256;
+//                System.err.println(shift);
+//                System.err.println(i);
+                buf.add( cur );
                 length++;
             }
+            for(int i = buf.size()-1; i>=0;i--){
+            	data.add(buf.get(i));
+            }
+//            System.err.println("data size:"+data.size());
         }
 
         

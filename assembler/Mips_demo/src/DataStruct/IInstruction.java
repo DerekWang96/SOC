@@ -1,5 +1,6 @@
 package DataStruct;
 import util.ImmProcessors;
+import util.LogOutoutFactory;
 
 public class IInstruction extends Instruction {
     private int regsource;
@@ -15,6 +16,7 @@ public class IInstruction extends Instruction {
         	String msg = "[ERROR]: ";
             msg += opname.toLowerCase() + " on line " + line;
             msg += " has an immediate value larger than 16 bits.";
+            LogOutoutFactory.append("(Error): "+msg+"\n");
             throw new Exception( msg );
         }
     }
@@ -30,6 +32,7 @@ public class IInstruction extends Instruction {
             msg += code.toString() + " on line: " + line;
             msg += " has a label. This operation does not take labels.\n";
 //            System.err.println(msg);
+            LogOutoutFactory.append("(Error): "+msg+"\n");
             throw new Exception( msg );
         }
     }

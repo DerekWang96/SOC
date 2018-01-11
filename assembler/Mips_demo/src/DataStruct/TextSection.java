@@ -1,5 +1,7 @@
 package DataStruct;
 import java.util.*;
+
+import util.LogOutoutFactory;
 public class TextSection {
     public ArrayList<Instruction> ilist;
     public Hashtable<String,Label> symtable;
@@ -22,10 +24,10 @@ public class TextSection {
             for( Instruction i: list ) {
                 // Add Labels that are at instruction address
                 for( Label l: syms.values() ) {
-                    if( l.getOffset() == i.getAddress() ) {
+                    if( l.getOffset() == i.getOffset() ) {
                         addLabel( l );
                         syms.remove( l.getName() );
-                    } else if ( l.getOffset() > i.getAddress() ) {
+                    } else if ( l.getOffset() > i.getOffset() ) {
                         break;
                     }
                 }
@@ -42,21 +44,22 @@ public class TextSection {
 
     public void addInstructions( ArrayList<Instruction> list ) {
         for( Instruction i: list ) {
-            i.setAddress( ilist.size() * 4 );
+            i.setOffset( ilist.size() * 4 );
             ilist.add( i );
         }
     }
 
     public void addInstruction( Instruction i ) {
-        i.setAddress( ilist.size() * 4 );
+        i.setOffset( ilist.size() * 4 );
         ilist.add( i );
     }
 
     public void addLabel( Label l ) throws Exception {
         if( symtable.containsKey( l.getName() ) ) {
+        	LogOutoutFactory.append("(Error): "+l + " was declared more than once in one text section.\n");
             throw new Exception( l + " was declared more than once in one text section." );
         }
-        l.setOffset( ilist.size() * 4 );
+        l.setOffset( ilist.size() * 4 );//一个字节一个地址 所以一条指令4个字
         symtable.put( l.getName(), l );
     }
 

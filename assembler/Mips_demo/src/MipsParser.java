@@ -7,6 +7,7 @@ import java_cup.runtime.Symbol;
 import java.util.*;
 import DataStruct.*;
 import java_cup.runtime.XMLElement;
+import util.LogOutoutFactory;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
   */
@@ -48,7 +49,7 @@ public class MipsParser extends java_cup.runtime.lr_parser {
     "\000\002\023\010\000\002\023\010\000\002\023\011\000" +
     "\002\023\006\000\002\022\010\000\002\022\006\000\002" +
     "\022\010\000\002\022\004\000\002\022\004\000\002\022" +
-    "\006\000\002\022\003\000\002\022\003\000\002\022\006" +
+    "\010\000\002\022\003\000\002\022\003\000\002\022\006" +
     "\000\002\022\003\000\002\022\004\000\002\022\003\000" +
     "\002\024\004" });
 
@@ -58,9 +59,9 @@ public class MipsParser extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\212\000\006\007\006\010\007\001\002\000\010\002" +
-    "\000\007\006\010\007\001\002\000\004\002\212\001\002" +
-    "\000\004\004\132\001\002\000\006\004\012\045\013\001" +
+    "\000\214\000\006\007\006\010\007\001\002\000\010\002" +
+    "\000\007\006\010\007\001\002\000\004\002\214\001\002" +
+    "\000\004\004\134\001\002\000\006\004\012\045\013\001" +
     "\002\000\010\002\ufffc\007\ufffc\010\ufffc\001\002\000\010" +
     "\002\ufffd\007\ufffd\010\ufffd\001\002\000\046\013\043\014" +
     "\024\015\021\016\042\017\037\020\026\021\040\022\027" +
@@ -69,25 +70,25 @@ public class MipsParser extends java_cup.runtime.lr_parser {
     "\001\002\000\046\013\043\014\024\015\021\016\042\017" +
     "\037\020\026\021\040\022\027\023\032\024\041\025\023" +
     "\026\017\027\022\030\036\031\015\032\033\033\020\034" +
-    "\025\001\002\000\004\044\123\001\002\000\054\002\uffdd" +
+    "\025\001\002\000\004\044\125\001\002\000\054\002\uffdd" +
     "\007\uffdd\010\uffdd\013\uffdd\014\uffdd\015\uffdd\016\uffdd\017" +
     "\uffdd\020\uffdd\021\uffdd\022\uffdd\023\uffdd\024\uffdd\025\uffdd" +
     "\026\uffdd\027\uffdd\030\uffdd\031\uffdd\032\uffdd\033\uffdd\034" +
-    "\uffdd\001\002\000\004\044\120\001\002\000\004\044\115" +
-    "\001\002\000\004\044\112\001\002\000\004\004\uffc5\001" +
-    "\002\000\004\004\uffca\001\002\000\004\044\105\001\002" +
-    "\000\006\013\064\045\065\001\002\000\004\044\103\001" +
-    "\002\000\004\044\102\001\002\000\004\004\101\001\002" +
-    "\000\004\004\100\001\002\000\004\004\uffc9\001\002\000" +
-    "\004\044\073\001\002\000\056\002\uffdc\004\072\007\uffdc" +
+    "\uffdd\001\002\000\004\044\122\001\002\000\004\044\117" +
+    "\001\002\000\004\044\114\001\002\000\004\004\uffc5\001" +
+    "\002\000\004\004\uffca\001\002\000\004\044\107\001\002" +
+    "\000\006\013\066\045\067\001\002\000\004\044\105\001" +
+    "\002\000\004\044\104\001\002\000\004\004\103\001\002" +
+    "\000\004\004\102\001\002\000\004\004\uffc9\001\002\000" +
+    "\004\044\075\001\002\000\056\002\uffdc\004\074\007\uffdc" +
     "\010\uffdc\013\uffdc\014\uffdc\015\uffdc\016\uffdc\017\uffdc\020" +
     "\uffdc\021\uffdc\022\uffdc\023\uffdc\024\uffdc\025\uffdc\026\uffdc" +
     "\027\uffdc\030\uffdc\031\uffdc\032\uffdc\033\uffdc\034\uffdc\001" +
     "\002\000\054\002\uffe1\007\uffe1\010\uffe1\013\043\014\024" +
     "\015\021\016\042\017\037\020\026\021\040\022\027\023" +
     "\032\024\041\025\023\026\017\027\022\030\036\031\015" +
-    "\032\033\033\020\034\025\001\002\000\004\044\060\001" +
-    "\002\000\004\044\057\001\002\000\004\044\054\001\002" +
+    "\032\033\033\020\034\025\001\002\000\004\044\062\001" +
+    "\002\000\004\044\061\001\002\000\004\044\054\001\002" +
     "\000\004\004\uffc7\001\002\000\004\044\047\001\002\000" +
     "\004\006\046\001\002\000\004\004\045\001\002\000\054" +
     "\002\uffd8\007\uffd8\010\uffd8\013\uffd8\014\uffd8\015\uffd8\016" +
@@ -100,96 +101,97 @@ public class MipsParser extends java_cup.runtime.lr_parser {
     "\002\000\004\005\050\001\002\000\004\044\051\001\002" +
     "\000\004\005\052\001\002\000\004\045\053\001\002\000" +
     "\004\004\uffce\001\002\000\004\005\055\001\002\000\004" +
-    "\044\056\001\002\000\004\004\uffcb\001\002\000\004\004" +
-    "\uffcd\001\002\000\004\005\061\001\002\000\004\044\062" +
-    "\001\002\000\004\005\063\001\002\000\006\013\064\045" +
-    "\065\001\002\000\006\004\uffd5\011\uffd5\001\002\000\006" +
-    "\004\uffd6\011\uffd6\001\002\000\004\004\uffd4\001\002\000" +
-    "\054\002\uffe0\007\uffe0\010\uffe0\013\uffe0\014\uffe0\015\uffe0" +
-    "\016\uffe0\017\uffe0\020\uffe0\021\uffe0\022\uffe0\023\uffe0\024" +
-    "\uffe0\025\uffe0\026\uffe0\027\uffe0\030\uffe0\031\uffe0\032\uffe0" +
-    "\033\uffe0\034\uffe0\001\002\000\056\002\uffdf\004\071\007" +
-    "\uffdf\010\uffdf\013\uffdf\014\uffdf\015\uffdf\016\uffdf\017\uffdf" +
-    "\020\uffdf\021\uffdf\022\uffdf\023\uffdf\024\uffdf\025\uffdf\026" +
-    "\uffdf\027\uffdf\030\uffdf\031\uffdf\032\uffdf\033\uffdf\034\uffdf" +
-    "\001\002\000\054\002\uffde\007\uffde\010\uffde\013\uffde\014" +
-    "\uffde\015\uffde\016\uffde\017\uffde\020\uffde\021\uffde\022\uffde" +
-    "\023\uffde\024\uffde\025\uffde\026\uffde\027\uffde\030\uffde\031" +
-    "\uffde\032\uffde\033\uffde\034\uffde\001\002\000\054\002\uffdb" +
-    "\007\uffdb\010\uffdb\013\uffdb\014\uffdb\015\uffdb\016\uffdb\017" +
-    "\uffdb\020\uffdb\021\uffdb\022\uffdb\023\uffdb\024\uffdb\025\uffdb" +
-    "\026\uffdb\027\uffdb\030\uffdb\031\uffdb\032\uffdb\033\uffdb\034" +
-    "\uffdb\001\002\000\004\005\074\001\002\000\004\044\075" +
-    "\001\002\000\004\005\076\001\002\000\006\013\064\045" +
-    "\065\001\002\000\004\004\uffd3\001\002\000\054\002\uffd7" +
-    "\007\uffd7\010\uffd7\013\uffd7\014\uffd7\015\uffd7\016\uffd7\017" +
-    "\uffd7\020\uffd7\021\uffd7\022\uffd7\023\uffd7\024\uffd7\025\uffd7" +
-    "\026\uffd7\027\uffd7\030\uffd7\031\uffd7\032\uffd7\033\uffd7\034" +
-    "\uffd7\001\002\000\054\002\uffd9\007\uffd9\010\uffd9\013\uffd9" +
-    "\014\uffd9\015\uffd9\016\uffd9\017\uffd9\020\uffd9\021\uffd9\022" +
-    "\uffd9\023\uffd9\024\uffd9\025\uffd9\026\uffd9\027\uffd9\030\uffd9" +
-    "\031\uffd9\032\uffd9\033\uffd9\034\uffd9\001\002\000\004\004" +
-    "\uffc6\001\002\000\004\004\uffcc\001\002\000\004\004\uffc4" +
-    "\001\002\000\004\005\106\001\002\000\004\044\107\001" +
+    "\044\056\001\002\000\004\005\057\001\002\000\004\045" +
+    "\060\001\002\000\004\004\uffcb\001\002\000\004\004\uffcd" +
+    "\001\002\000\004\005\063\001\002\000\004\044\064\001" +
+    "\002\000\004\005\065\001\002\000\006\013\066\045\067" +
+    "\001\002\000\006\004\uffd5\011\uffd5\001\002\000\006\004" +
+    "\uffd6\011\uffd6\001\002\000\004\004\uffd4\001\002\000\054" +
+    "\002\uffe0\007\uffe0\010\uffe0\013\uffe0\014\uffe0\015\uffe0\016" +
+    "\uffe0\017\uffe0\020\uffe0\021\uffe0\022\uffe0\023\uffe0\024\uffe0" +
+    "\025\uffe0\026\uffe0\027\uffe0\030\uffe0\031\uffe0\032\uffe0\033" +
+    "\uffe0\034\uffe0\001\002\000\056\002\uffdf\004\073\007\uffdf" +
+    "\010\uffdf\013\uffdf\014\uffdf\015\uffdf\016\uffdf\017\uffdf\020" +
+    "\uffdf\021\uffdf\022\uffdf\023\uffdf\024\uffdf\025\uffdf\026\uffdf" +
+    "\027\uffdf\030\uffdf\031\uffdf\032\uffdf\033\uffdf\034\uffdf\001" +
+    "\002\000\054\002\uffde\007\uffde\010\uffde\013\uffde\014\uffde" +
+    "\015\uffde\016\uffde\017\uffde\020\uffde\021\uffde\022\uffde\023" +
+    "\uffde\024\uffde\025\uffde\026\uffde\027\uffde\030\uffde\031\uffde" +
+    "\032\uffde\033\uffde\034\uffde\001\002\000\054\002\uffdb\007" +
+    "\uffdb\010\uffdb\013\uffdb\014\uffdb\015\uffdb\016\uffdb\017\uffdb" +
+    "\020\uffdb\021\uffdb\022\uffdb\023\uffdb\024\uffdb\025\uffdb\026" +
+    "\uffdb\027\uffdb\030\uffdb\031\uffdb\032\uffdb\033\uffdb\034\uffdb" +
+    "\001\002\000\004\005\076\001\002\000\004\044\077\001" +
+    "\002\000\004\005\100\001\002\000\006\013\066\045\067" +
+    "\001\002\000\004\004\uffd3\001\002\000\054\002\uffd7\007" +
+    "\uffd7\010\uffd7\013\uffd7\014\uffd7\015\uffd7\016\uffd7\017\uffd7" +
+    "\020\uffd7\021\uffd7\022\uffd7\023\uffd7\024\uffd7\025\uffd7\026" +
+    "\uffd7\027\uffd7\030\uffd7\031\uffd7\032\uffd7\033\uffd7\034\uffd7" +
+    "\001\002\000\054\002\uffd9\007\uffd9\010\uffd9\013\uffd9\014" +
+    "\uffd9\015\uffd9\016\uffd9\017\uffd9\020\uffd9\021\uffd9\022\uffd9" +
+    "\023\uffd9\024\uffd9\025\uffd9\026\uffd9\027\uffd9\030\uffd9\031" +
+    "\uffd9\032\uffd9\033\uffd9\034\uffd9\001\002\000\004\004\uffc6" +
+    "\001\002\000\004\004\uffcc\001\002\000\004\004\uffc4\001" +
     "\002\000\004\005\110\001\002\000\004\044\111\001\002" +
-    "\000\004\004\uffd0\001\002\000\004\005\113\001\002\000" +
-    "\004\044\114\001\002\000\004\004\uffcf\001\002\000\004" +
-    "\005\116\001\002\000\006\013\064\045\065\001\002\000" +
-    "\004\004\uffd1\001\002\000\004\005\121\001\002\000\004" +
-    "\044\122\001\002\000\004\004\uffc8\001\002\000\004\005" +
-    "\124\001\002\000\006\013\064\045\065\001\002\000\004" +
-    "\011\126\001\002\000\004\044\127\001\002\000\004\012" +
-    "\130\001\002\000\004\004\uffd2\001\002\000\054\002\uffe2" +
-    "\007\uffe2\010\uffe2\013\043\014\024\015\021\016\042\017" +
-    "\037\020\026\021\040\022\027\023\032\024\041\025\023" +
-    "\026\017\027\022\030\036\031\015\032\033\033\020\034" +
-    "\025\001\002\000\004\013\134\001\002\000\026\002\ufff9" +
-    "\007\ufff9\010\ufff9\013\ufff9\035\150\036\142\037\152\040" +
-    "\137\041\141\042\143\001\002\000\004\006\175\001\002" +
-    "\000\012\002\ufffb\007\ufffb\010\ufffb\013\134\001\002\000" +
-    "\026\002\ufffa\007\ufffa\010\ufffa\013\ufffa\035\150\036\142" +
-    "\037\152\040\137\041\141\042\143\001\002\000\004\045" +
-    "\154\001\002\000\004\004\173\001\002\000\004\045\154" +
-    "\001\002\000\004\043\160\001\002\000\004\045\170\001" +
-    "\002\000\004\004\167\001\002\000\004\004\166\001\002" +
-    "\000\004\004\165\001\002\000\004\004\164\001\002\000" +
-    "\004\043\160\001\002\000\004\004\157\001\002\000\004" +
-    "\045\154\001\002\000\006\004\uffea\005\155\001\002\000" +
-    "\006\004\uffe3\005\uffe3\001\002\000\004\045\156\001\002" +
-    "\000\006\004\uffe4\005\uffe4\001\002\000\026\002\uffee\007" +
-    "\uffee\010\uffee\013\uffee\035\uffee\036\uffee\037\uffee\040\uffee" +
-    "\041\uffee\042\uffee\001\002\000\006\004\uffe5\005\uffe5\001" +
-    "\002\000\006\004\uffec\005\162\001\002\000\004\043\163" +
-    "\001\002\000\006\004\uffe6\005\uffe6\001\002\000\026\002" +
-    "\ufff1\007\ufff1\010\ufff1\013\ufff1\035\ufff1\036\ufff1\037\ufff1" +
-    "\040\ufff1\041\ufff1\042\ufff1\001\002\000\026\002\ufff2\007" +
-    "\ufff2\010\ufff2\013\ufff2\035\ufff2\036\ufff2\037\ufff2\040\ufff2" +
-    "\041\ufff2\042\ufff2\001\002\000\026\002\uffed\007\uffed\010" +
-    "\uffed\013\uffed\035\uffed\036\uffed\037\uffed\040\uffed\041\uffed" +
-    "\042\uffed\001\002\000\026\002\ufff0\007\ufff0\010\ufff0\013" +
-    "\ufff0\035\ufff0\036\ufff0\037\ufff0\040\ufff0\041\ufff0\042\ufff0" +
-    "\001\002\000\004\004\uffe7\001\002\000\006\004\uffeb\005" +
-    "\162\001\002\000\006\004\uffe8\005\155\001\002\000\026" +
-    "\002\uffef\007\uffef\010\uffef\013\uffef\035\uffef\036\uffef\037" +
-    "\uffef\040\uffef\041\uffef\042\uffef\001\002\000\006\004\uffe9" +
-    "\005\155\001\002\000\016\035\150\036\142\037\152\040" +
-    "\137\041\141\042\143\001\002\000\004\004\211\001\002" +
-    "\000\004\004\210\001\002\000\004\004\207\001\002\000" +
-    "\004\004\206\001\002\000\004\004\205\001\002\000\004" +
-    "\004\204\001\002\000\026\002\ufff4\007\ufff4\010\ufff4\013" +
-    "\ufff4\035\ufff4\036\ufff4\037\ufff4\040\ufff4\041\ufff4\042\ufff4" +
-    "\001\002\000\026\002\ufff6\007\ufff6\010\ufff6\013\ufff6\035" +
-    "\ufff6\036\ufff6\037\ufff6\040\ufff6\041\ufff6\042\ufff6\001\002" +
-    "\000\026\002\ufff8\007\ufff8\010\ufff8\013\ufff8\035\ufff8\036" +
-    "\ufff8\037\ufff8\040\ufff8\041\ufff8\042\ufff8\001\002\000\026" +
-    "\002\ufff3\007\ufff3\010\ufff3\013\ufff3\035\ufff3\036\ufff3\037" +
-    "\ufff3\040\ufff3\041\ufff3\042\ufff3\001\002\000\026\002\ufff7" +
-    "\007\ufff7\010\ufff7\013\ufff7\035\ufff7\036\ufff7\037\ufff7\040" +
-    "\ufff7\041\ufff7\042\ufff7\001\002\000\026\002\ufff5\007\ufff5" +
-    "\010\ufff5\013\ufff5\035\ufff5\036\ufff5\037\ufff5\040\ufff5\041" +
-    "\ufff5\042\ufff5\001\002\000\004\002\001\001\002\000\010" +
-    "\002\uffff\007\uffff\010\uffff\001\002\000\010\002\ufffe\007" +
-    "\ufffe\010\ufffe\001\002" });
+    "\000\004\005\112\001\002\000\004\044\113\001\002\000" +
+    "\004\004\uffd0\001\002\000\004\005\115\001\002\000\004" +
+    "\044\116\001\002\000\004\004\uffcf\001\002\000\004\005" +
+    "\120\001\002\000\006\013\066\045\067\001\002\000\004" +
+    "\004\uffd1\001\002\000\004\005\123\001\002\000\004\044" +
+    "\124\001\002\000\004\004\uffc8\001\002\000\004\005\126" +
+    "\001\002\000\006\013\066\045\067\001\002\000\004\011" +
+    "\130\001\002\000\004\044\131\001\002\000\004\012\132" +
+    "\001\002\000\004\004\uffd2\001\002\000\054\002\uffe2\007" +
+    "\uffe2\010\uffe2\013\043\014\024\015\021\016\042\017\037" +
+    "\020\026\021\040\022\027\023\032\024\041\025\023\026" +
+    "\017\027\022\030\036\031\015\032\033\033\020\034\025" +
+    "\001\002\000\004\013\136\001\002\000\026\002\ufff9\007" +
+    "\ufff9\010\ufff9\013\ufff9\035\152\036\144\037\154\040\141" +
+    "\041\143\042\145\001\002\000\004\006\177\001\002\000" +
+    "\012\002\ufffb\007\ufffb\010\ufffb\013\136\001\002\000\026" +
+    "\002\ufffa\007\ufffa\010\ufffa\013\ufffa\035\152\036\144\037" +
+    "\154\040\141\041\143\042\145\001\002\000\004\045\156" +
+    "\001\002\000\004\004\175\001\002\000\004\045\156\001" +
+    "\002\000\004\043\162\001\002\000\004\045\172\001\002" +
+    "\000\004\004\171\001\002\000\004\004\170\001\002\000" +
+    "\004\004\167\001\002\000\004\004\166\001\002\000\004" +
+    "\043\162\001\002\000\004\004\161\001\002\000\004\045" +
+    "\156\001\002\000\006\004\uffea\005\157\001\002\000\006" +
+    "\004\uffe3\005\uffe3\001\002\000\004\045\160\001\002\000" +
+    "\006\004\uffe4\005\uffe4\001\002\000\026\002\uffee\007\uffee" +
+    "\010\uffee\013\uffee\035\uffee\036\uffee\037\uffee\040\uffee\041" +
+    "\uffee\042\uffee\001\002\000\006\004\uffe5\005\uffe5\001\002" +
+    "\000\006\004\uffec\005\164\001\002\000\004\043\165\001" +
+    "\002\000\006\004\uffe6\005\uffe6\001\002\000\026\002\ufff1" +
+    "\007\ufff1\010\ufff1\013\ufff1\035\ufff1\036\ufff1\037\ufff1\040" +
+    "\ufff1\041\ufff1\042\ufff1\001\002\000\026\002\ufff2\007\ufff2" +
+    "\010\ufff2\013\ufff2\035\ufff2\036\ufff2\037\ufff2\040\ufff2\041" +
+    "\ufff2\042\ufff2\001\002\000\026\002\uffed\007\uffed\010\uffed" +
+    "\013\uffed\035\uffed\036\uffed\037\uffed\040\uffed\041\uffed\042" +
+    "\uffed\001\002\000\026\002\ufff0\007\ufff0\010\ufff0\013\ufff0" +
+    "\035\ufff0\036\ufff0\037\ufff0\040\ufff0\041\ufff0\042\ufff0\001" +
+    "\002\000\004\004\uffe7\001\002\000\006\004\uffeb\005\164" +
+    "\001\002\000\006\004\uffe8\005\157\001\002\000\026\002" +
+    "\uffef\007\uffef\010\uffef\013\uffef\035\uffef\036\uffef\037\uffef" +
+    "\040\uffef\041\uffef\042\uffef\001\002\000\006\004\uffe9\005" +
+    "\157\001\002\000\016\035\152\036\144\037\154\040\141" +
+    "\041\143\042\145\001\002\000\004\004\213\001\002\000" +
+    "\004\004\212\001\002\000\004\004\211\001\002\000\004" +
+    "\004\210\001\002\000\004\004\207\001\002\000\004\004" +
+    "\206\001\002\000\026\002\ufff4\007\ufff4\010\ufff4\013\ufff4" +
+    "\035\ufff4\036\ufff4\037\ufff4\040\ufff4\041\ufff4\042\ufff4\001" +
+    "\002\000\026\002\ufff6\007\ufff6\010\ufff6\013\ufff6\035\ufff6" +
+    "\036\ufff6\037\ufff6\040\ufff6\041\ufff6\042\ufff6\001\002\000" +
+    "\026\002\ufff8\007\ufff8\010\ufff8\013\ufff8\035\ufff8\036\ufff8" +
+    "\037\ufff8\040\ufff8\041\ufff8\042\ufff8\001\002\000\026\002" +
+    "\ufff3\007\ufff3\010\ufff3\013\ufff3\035\ufff3\036\ufff3\037\ufff3" +
+    "\040\ufff3\041\ufff3\042\ufff3\001\002\000\026\002\ufff7\007" +
+    "\ufff7\010\ufff7\013\ufff7\035\ufff7\036\ufff7\037\ufff7\040\ufff7" +
+    "\041\ufff7\042\ufff7\001\002\000\026\002\ufff5\007\ufff5\010" +
+    "\ufff5\013\ufff5\035\ufff5\036\ufff5\037\ufff5\040\ufff5\041\ufff5" +
+    "\042\ufff5\001\002\000\004\002\001\001\002\000\010\002" +
+    "\uffff\007\uffff\010\uffff\001\002\000\010\002\ufffe\007\ufffe" +
+    "\010\ufffe\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -197,58 +199,59 @@ public class MipsParser extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\212\000\012\002\004\003\003\004\007\017\010\001" +
-    "\001\000\006\004\212\017\213\001\001\000\002\001\001" +
+    "\000\214\000\012\002\004\003\003\004\007\017\010\001" +
+    "\001\000\006\004\214\017\215\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\016\020\130\021\015\022\027\023\043" +
+    "\002\001\001\000\016\020\132\021\015\022\027\023\043" +
     "\024\030\025\033\001\001\000\002\001\001\000\016\020" +
     "\034\021\015\022\027\023\043\024\030\025\033\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\004\026\103\001\001\000" +
+    "\001\001\000\002\001\001\000\004\026\105\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\014\021\066\022\027\023\043\024\030\025\067" +
+    "\001\000\014\021\070\022\027\023\043\024\030\025\071" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\004\026\065\001" +
-    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\004\026\067\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\004\026\076\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\004\026" +
+    "\100\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\004\026\116\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\004\026\124\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\014\021\066\022\027\023\043\024\030\025\067\001\001" +
-    "\000\006\005\134\006\132\001\001\000\016\007\145\010" +
-    "\143\011\146\012\137\013\150\014\144\001\001\000\002" +
-    "\001\001\000\004\006\135\001\001\000\016\007\145\010" +
-    "\143\011\146\012\137\013\150\014\144\001\001\000\004" +
-    "\016\173\001\001\000\002\001\001\000\004\016\171\001" +
-    "\001\000\004\015\170\001\001\000\002\001\001\000\002" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\004" +
+    "\026\120\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\004" +
+    "\026\126\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\014\021\070\022\027" +
+    "\023\043\024\030\025\071\001\001\000\006\005\136\006" +
+    "\134\001\001\000\016\007\147\010\145\011\150\012\141" +
+    "\013\152\014\146\001\001\000\002\001\001\000\004\006" +
+    "\137\001\001\000\016\007\147\010\145\011\150\012\141" +
+    "\013\152\014\146\001\001\000\004\016\175\001\001\000" +
+    "\002\001\001\000\004\016\173\001\001\000\004\015\172" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\004\015\160\001\001\000\002\001\001\000\004" +
-    "\016\152\001\001\000\002\001\001\000\002\001\001\000" +
+    "\001\000\002\001\001\000\002\001\001\000\004\015\162" +
+    "\001\001\000\002\001\001\000\004\016\154\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\002\001\001\000\016" +
-    "\007\200\010\176\011\201\012\175\013\202\014\177\001" +
-    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\016\007\202\010\200\011" +
+    "\203\012\177\013\204\014\201\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001" });
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -415,6 +418,7 @@ class CUP$MipsParser$actions {
 		int fulldright = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.peek()).right;
 		DataSection fulld = (DataSection)((java_cup.runtime.Symbol) CUP$MipsParser$stack.peek()).value;
 		 System.out.println("[Parser]: find datasection " + " at line: " + fulldleft); 
+                    LogOutoutFactory.append("(Log): "+"[Parser]: find datasection " + " at line: " + fulldleft +"\n");
                       RESULT = fulld; 
               CUP$MipsParser$result = parser.getSymbolFactory().newSymbol("datasection",2, ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-2)), ((java_cup.runtime.Symbol)CUP$MipsParser$stack.peek()), RESULT);
             }
@@ -465,6 +469,7 @@ class CUP$MipsParser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-1)).right;
 		DataItem d = (DataItem)((java_cup.runtime.Symbol) CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-1)).value;
 		 System.out.println("[Parser]: find data declaration "+l + " at line: " + lleft); 
+                  LogOutoutFactory.append("(Log): "+"[Parser]: find data declaration "+l + " at line: " + lleft +"\n");
                    DataDeclaration decl = new DataDeclaration(l,lleft,lright );
                    decl.addData(d);
                    RESULT = decl;
@@ -484,6 +489,7 @@ class CUP$MipsParser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-1)).right;
 		DataItem d = (DataItem)((java_cup.runtime.Symbol) CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-1)).value;
 		 System.out.println("[Parser]: find data declaration "+l + " at line: " + lleft); 
+                LogOutoutFactory.append("(Log): "+"[Parser]: find data declaration "+l + " at line: " + lleft +"\n");
                    DataDeclaration decl = new DataDeclaration(l,lleft,lright );
                    decl.addData(d);
                    RESULT = decl;
@@ -503,6 +509,7 @@ class CUP$MipsParser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-1)).right;
 		DataItem d = (DataItem)((java_cup.runtime.Symbol) CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-1)).value;
 		 System.out.println("[Parser]: find data declaration "+l + " at line: " + lleft); 
+                  LogOutoutFactory.append("(Log): "+"[Parser]: find data declaration "+l + " at line: " + lleft+"\n");
                    DataDeclaration decl = new DataDeclaration(l,lleft,lright );
                    decl.addData(d);
                    RESULT = decl;
@@ -522,6 +529,7 @@ class CUP$MipsParser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-1)).right;
 		DataItem d = (DataItem)((java_cup.runtime.Symbol) CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-1)).value;
 		 System.out.println("[Parser]: find data declaration "+l + " at line: " + lleft); 
+                   LogOutoutFactory.append("(Log): "+"[Parser]: find data declaration "+l + " at line: " + lleft+"\n");
                    DataDeclaration decl = new DataDeclaration(l,lleft,lright );
                    decl.addData(d);
                    RESULT = decl;
@@ -541,6 +549,7 @@ class CUP$MipsParser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-1)).right;
 		DataItem d = (DataItem)((java_cup.runtime.Symbol) CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-1)).value;
 		 System.out.println("[Parser]: find data declaration "+l + " at line: " + lleft); 
+                   LogOutoutFactory.append("(Log): "+"[Parser]: find data declaration "+l + " at line: " + lleft +"\n");
                    DataDeclaration decl = new DataDeclaration(l,lleft,lright );
                    decl.addData(d);
                    RESULT = decl;
@@ -560,6 +569,7 @@ class CUP$MipsParser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-1)).right;
 		DataItem d = (DataItem)((java_cup.runtime.Symbol) CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-1)).value;
 		 System.out.println("[Parser]: find data declaration "+l + " at line: " + lleft); 
+                   LogOutoutFactory.append("(Log): "+"[Parser]: find data declaration "+l + " at line: " + lleft +"\n");               
                    DataDeclaration decl = new DataDeclaration(l,lleft,lright );
                    decl.addData(d);
                    RESULT = decl;
@@ -678,6 +688,8 @@ class CUP$MipsParser$actions {
 		int sright = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.peek()).right;
 		ArrayList<String> s = (ArrayList<String>)((java_cup.runtime.Symbol) CUP$MipsParser$stack.peek()).value;
 		 System.out.println("[Parser]: find data "+s + " at line: " + sleft);  
+                   LogOutoutFactory.append("(Log): "+"[Parser]: find data "+s + " at line: " + sleft +"\n");               
+
                       RESULT = new DataItem( sleft, sright, s, true ); 
               CUP$MipsParser$result = parser.getSymbolFactory().newSymbol("dataasciiz",5, ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-1)), ((java_cup.runtime.Symbol)CUP$MipsParser$stack.peek()), RESULT);
             }
@@ -691,6 +703,8 @@ class CUP$MipsParser$actions {
 		int sright = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.peek()).right;
 		ArrayList<String> s = (ArrayList<String>)((java_cup.runtime.Symbol) CUP$MipsParser$stack.peek()).value;
 		System.out.println("[Parser]: find data "+s + " at line: " + sleft);  
+                   LogOutoutFactory.append("(Log): "+"[Parser]: find data "+s + " at line: " + sleft +"\n");               
+
                     RESULT = new DataItem( sleft, sright, s, false ); 
               CUP$MipsParser$result = parser.getSymbolFactory().newSymbol("dataascii",6, ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-1)), ((java_cup.runtime.Symbol)CUP$MipsParser$stack.peek()), RESULT);
             }
@@ -704,6 +718,8 @@ class CUP$MipsParser$actions {
 		int iright = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.peek()).right;
 		ArrayList<Long> i = (ArrayList<Long>)((java_cup.runtime.Symbol) CUP$MipsParser$stack.peek()).value;
 		System.out.println("[Parser]: find data "+i + " at line: " + ileft); 
+                   LogOutoutFactory.append("(Log): "+"[Parser]: find data "+i + " at line: " + ileft +"\n");               
+
                      RESULT = new DataItem( ileft, iright, i, 8 ); 
               CUP$MipsParser$result = parser.getSymbolFactory().newSymbol("databyte",7, ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-1)), ((java_cup.runtime.Symbol)CUP$MipsParser$stack.peek()), RESULT);
             }
@@ -716,7 +732,9 @@ class CUP$MipsParser$actions {
 		int ileft = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.peek()).left;
 		int iright = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.peek()).right;
 		ArrayList<Long> i = (ArrayList<Long>)((java_cup.runtime.Symbol) CUP$MipsParser$stack.peek()).value;
-		System.out.println("[Parser]: find data "+i + " at line: " + ileft);  
+		System.out.println("[Parser]: find data "+i + " at line: " + ileft); 
+                   LogOutoutFactory.append("(Log): "+"[Parser]: find data "+i + " at line: " + ileft +"\n");               
+
                     RESULT = new DataItem( ileft, iright, i, 16 ); 
               CUP$MipsParser$result = parser.getSymbolFactory().newSymbol("datahalfword",8, ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-1)), ((java_cup.runtime.Symbol)CUP$MipsParser$stack.peek()), RESULT);
             }
@@ -730,6 +748,8 @@ class CUP$MipsParser$actions {
 		int iright = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.peek()).right;
 		ArrayList<Long> i = (ArrayList<Long>)((java_cup.runtime.Symbol) CUP$MipsParser$stack.peek()).value;
 		System.out.println("[Parser]: find data "+i + " at line: " + ileft);  
+                   LogOutoutFactory.append("(Log): "+"[Parser]: find data "+i + " at line: " + ileft +"\n");               
+
                     RESULT = new DataItem( ileft, iright, i, 32 ); 
               CUP$MipsParser$result = parser.getSymbolFactory().newSymbol("dataword",9, ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-1)), ((java_cup.runtime.Symbol)CUP$MipsParser$stack.peek()), RESULT);
             }
@@ -743,6 +763,7 @@ class CUP$MipsParser$actions {
 		int iright = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.peek()).right;
 		Long i = (Long)((java_cup.runtime.Symbol) CUP$MipsParser$stack.peek()).value;
 		System.out.println("[Parser]: find data "+i + " at line: " + ileft);  
+                    LogOutoutFactory.append("(Log): "+"[Parser]: find data "+i + " at line: " + ileft +"\n");  
                     RESULT = new DataItem( ileft, iright, (int)i.longValue() ); 
               CUP$MipsParser$result = parser.getSymbolFactory().newSymbol("dataspace",10, ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-1)), ((java_cup.runtime.Symbol)CUP$MipsParser$stack.peek()), RESULT);
             }
@@ -810,6 +831,8 @@ class CUP$MipsParser$actions {
 		int tdfullright = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.peek()).right;
 		TextSection tdfull = (TextSection)((java_cup.runtime.Symbol) CUP$MipsParser$stack.peek()).value;
 		  System.out.println("[Parser]: find text section " + " at line: " + tdfullleft); 
+                    LogOutoutFactory.append("(Log): "+"[Parser]: find text section " + " at line: " + tdfullleft +"\n");  
+
                       RESULT = tdfull; 
               CUP$MipsParser$result = parser.getSymbolFactory().newSymbol("textsection",13, ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-2)), ((java_cup.runtime.Symbol)CUP$MipsParser$stack.peek()), RESULT);
             }
@@ -826,6 +849,8 @@ class CUP$MipsParser$actions {
 		int tdfullright = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.peek()).right;
 		TextSection tdfull = (TextSection)((java_cup.runtime.Symbol) CUP$MipsParser$stack.peek()).value;
 		 System.out.println("[Parser]: find text section " + " at line: " + ileft); 
+                    LogOutoutFactory.append("(Log): "+"[Parser]: find text section " + " at line: " + ileft +"\n");  
+
                     tdfull.setStartAddress(i);
                     RESULT = tdfull; 
               CUP$MipsParser$result = parser.getSymbolFactory().newSymbol("textsection",13, ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-3)), ((java_cup.runtime.Symbol)CUP$MipsParser$stack.peek()), RESULT);
@@ -937,6 +962,8 @@ class CUP$MipsParser$actions {
 		String l = (String)((java_cup.runtime.Symbol) CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-1)).value;
 		
                         System.out.println("[Parser]: find var|subpro declaration "+l + " at line: " + lleft);
+                       LogOutoutFactory.append("(Log): "+"[Parser]: find var|subpro declaration "+l + " at line: " + lleft +"\n");  
+
                         RESULT = new Label( lleft, lright, l, 0 );
                     
               CUP$MipsParser$result = parser.getSymbolFactory().newSymbol("labeldecl",19, ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-1)), ((java_cup.runtime.Symbol)CUP$MipsParser$stack.peek()), RESULT);
@@ -1021,6 +1048,8 @@ class CUP$MipsParser$actions {
 		Object iol = (Object)((java_cup.runtime.Symbol) CUP$MipsParser$stack.peek()).value;
 		
                         System.out.println("[Parser]: find Iinst "+op + " at line: " + opleft);
+                       LogOutoutFactory.append("(Log): "+"[Parser]: find Iinst "+op + " at line: " + opleft +"\n");  
+
                         if( iol instanceof String ) {
                             RESULT = new IInstruction( opleft,
                                                        opright,
@@ -1059,6 +1088,8 @@ class CUP$MipsParser$actions {
 		Object iol = (Object)((java_cup.runtime.Symbol) CUP$MipsParser$stack.peek()).value;
 		
                         System.out.println("[Parser]: find Iinst "+op + " at line: " + opleft);
+                       LogOutoutFactory.append("(Log): "+"[Parser]: find Iinst "+op + " at line: " + opleft +"\n");  
+
                         if( iol instanceof String ) {
                             RESULT = new IInstruction( opleft,
                                                        opright,
@@ -1098,6 +1129,8 @@ class CUP$MipsParser$actions {
 		Integer rs = (Integer)((java_cup.runtime.Symbol) CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-1)).value;
 		
                         System.out.println("[Parser]: find Iinst "+op + " at line: " + opleft);
+                       LogOutoutFactory.append("(Log): "+"[Parser]: find Iinst "+op + " at line: " + opleft+"\n");  
+
                         if( iol instanceof String ) {
                             RESULT = new IInstruction( opleft,
                                                        opright,
@@ -1134,6 +1167,8 @@ class CUP$MipsParser$actions {
 		Object iol = (Object)((java_cup.runtime.Symbol) CUP$MipsParser$stack.peek()).value;
 		
                         System.out.println("[Parser]: find Iinst "+op + " at line: " + opleft);
+                       LogOutoutFactory.append("(Log): "+"[Parser]: find Iinst "+op + " at line: " + opleft+"\n");  
+
                         int rsNum = 0;
                         int rtNum = 0;
                         switch(op){
@@ -1195,7 +1230,9 @@ class CUP$MipsParser$actions {
 		int rtright = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.peek()).right;
 		Integer rt = (Integer)((java_cup.runtime.Symbol) CUP$MipsParser$stack.peek()).value;
 		
-                        System.out.println("[Parser]: find Rinst "+op + " at line: " + opleft);                      
+                        System.out.println("[Parser]: find Rinst "+op + " at line: " + opleft); 
+                       LogOutoutFactory.append("(Log): "+"[Parser]: find Rinst "+op + " at line: " + opleft+"\n");  
+
                         RESULT = new RInstruction( opleft,
                                                    opright,
                                                    op.toUpperCase(),
@@ -1223,6 +1260,8 @@ class CUP$MipsParser$actions {
 		Integer rs = (Integer)((java_cup.runtime.Symbol) CUP$MipsParser$stack.peek()).value;
 		
                         System.out.println("[Parser]: find Rinst "+op + " at line: " + opleft);
+                       LogOutoutFactory.append("(Log): "+"[Parser]: find Rinst "+op + " at line: " + opleft+"\n");  
+
                         RESULT = new RInstruction( opleft,
                                                    opright,
                                                    op.toUpperCase(),
@@ -1254,6 +1293,8 @@ class CUP$MipsParser$actions {
 		Long shamt = (Long)((java_cup.runtime.Symbol) CUP$MipsParser$stack.peek()).value;
 		
                         System.out.println("[Parser]: find Rinst "+op + " at line: " + opleft);
+                       LogOutoutFactory.append("(Log): "+"[Parser]: find Rinst "+op + " at line: " + opleft+"\n");  
+
                         RESULT = new RInstruction( opleft,
                                                    opright,
                                                    op.toUpperCase(),
@@ -1278,6 +1319,8 @@ class CUP$MipsParser$actions {
 		Integer rd = (Integer)((java_cup.runtime.Symbol) CUP$MipsParser$stack.peek()).value;
 		  
                         System.out.println("[Parser]: find Rinst "+op + " at line: " + opleft);
+                       LogOutoutFactory.append("(Log): "+"[Parser]: find Rinst "+op + " at line: " + opleft+"\n");  
+
                         RESULT = new RInstruction( opleft,
                                                    opright,
                                                    op.toUpperCase(),
@@ -1303,6 +1346,8 @@ class CUP$MipsParser$actions {
 		Integer rs = (Integer)((java_cup.runtime.Symbol) CUP$MipsParser$stack.peek()).value;
 		  
                         System.out.println("[Parser]: find Rinst "+op + " at line: " + opleft);
+                       LogOutoutFactory.append("(Log): "+"[Parser]: find Rinst "+op + " at line: " + opleft+"\n");  
+
                         RESULT = new RInstruction( opleft,
                                                    opright,
                                                    op.toUpperCase(),
@@ -1317,30 +1362,47 @@ class CUP$MipsParser$actions {
           return CUP$MipsParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 54: // rinst ::= RSPOPER REG COMMA REG 
+          case 54: // rinst ::= RSPOPER REG COMMA REG COMMA IMM 
             {
               RInstruction RESULT =null;
-		int opleft = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-3)).left;
-		int opright = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-3)).right;
-		String op = (String)((java_cup.runtime.Symbol) CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-3)).value;
-		int rtleft = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-2)).left;
-		int rtright = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-2)).right;
-		Integer rt = (Integer)((java_cup.runtime.Symbol) CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-2)).value;
-		int rdleft = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.peek()).left;
-		int rdright = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.peek()).right;
-		Integer rd = (Integer)((java_cup.runtime.Symbol) CUP$MipsParser$stack.peek()).value;
+		int opleft = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-5)).left;
+		int opright = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-5)).right;
+		String op = (String)((java_cup.runtime.Symbol) CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-5)).value;
+		int rtleft = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-4)).left;
+		int rtright = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-4)).right;
+		Integer rt = (Integer)((java_cup.runtime.Symbol) CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-4)).value;
+		int rdleft = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-2)).left;
+		int rdright = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-2)).right;
+		Integer rd = (Integer)((java_cup.runtime.Symbol) CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-2)).value;
+		int selleft = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.peek()).left;
+		int selright = ((java_cup.runtime.Symbol)CUP$MipsParser$stack.peek()).right;
+		Long sel = (Long)((java_cup.runtime.Symbol) CUP$MipsParser$stack.peek()).value;
 		
                         System.out.println("[Parser]: find Rinst "+op + " at line: " + opleft);
-                        RESULT = new RInstruction( opleft,
+                       LogOutoutFactory.append("(Log): "+"[Parser]: find Rinst "+op + " at line: " + opleft+"\n");  
+
+                        if(op.equals("mfc0")){
+                            RESULT = new RInstruction( opleft,
                                                    opright,
                                                    op.toUpperCase(),
                                                    0,
                                                    rt.intValue(),
                                                    rd.intValue(),
-                                                   0
+                                                   sel.longValue() 
                                                   );
+                        }
+                        else{
+                            RESULT = new RInstruction( opleft,
+                                                   opright,
+                                                   op.toUpperCase(),
+                                                   4,
+                                                   rt.intValue(),
+                                                   rd.intValue(),
+                                                   sel.longValue() 
+                                                  );
+                        }
                     
-              CUP$MipsParser$result = parser.getSymbolFactory().newSymbol("rinst",16, ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-3)), ((java_cup.runtime.Symbol)CUP$MipsParser$stack.peek()), RESULT);
+              CUP$MipsParser$result = parser.getSymbolFactory().newSymbol("rinst",16, ((java_cup.runtime.Symbol)CUP$MipsParser$stack.elementAt(CUP$MipsParser$top-5)), ((java_cup.runtime.Symbol)CUP$MipsParser$stack.peek()), RESULT);
             }
           return CUP$MipsParser$result;
 
@@ -1353,6 +1415,8 @@ class CUP$MipsParser$actions {
 		String op = (String)((java_cup.runtime.Symbol) CUP$MipsParser$stack.peek()).value;
 		
                         System.out.println("[Parser]: find Rinst "+op + " at line: " + opleft);
+                       LogOutoutFactory.append("(Log): "+"[Parser]: find Rinst "+op + " at line: " + opleft+"\n");  
+
                         RESULT = new RInstruction( opleft,
                                                    opright,
                                                    "ERET",
@@ -1374,6 +1438,8 @@ class CUP$MipsParser$actions {
 		String op = (String)((java_cup.runtime.Symbol) CUP$MipsParser$stack.peek()).value;
 		
                         System.out.println("[Parser]: find Rinst "+op + " at line: " + opleft);
+                       LogOutoutFactory.append("(Log): "+"[Parser]: find Rinst "+op + " at line: " + opleft+"\n");  
+
                         RESULT = new RInstruction( opleft,
                                                    opright,
                                                    "BREAK",
@@ -1401,6 +1467,8 @@ class CUP$MipsParser$actions {
 		Integer rd = (Integer)((java_cup.runtime.Symbol) CUP$MipsParser$stack.peek()).value;
 		
                         System.out.println("[Parser]: find Rinst "+op + " at line: " + opleft);
+                       LogOutoutFactory.append("(Log): "+"[Parser]: find Rinst "+op + " at line: " + opleft+"\n");  
+
                         RESULT = new RInstruction( opleft,
                                                    opright,
                                                    op.toUpperCase(),
@@ -1423,6 +1491,8 @@ class CUP$MipsParser$actions {
 		String op = (String)((java_cup.runtime.Symbol) CUP$MipsParser$stack.peek()).value;
 		
                         System.out.println("[Parser]: find Rinst "+op + " at line: " + opleft);
+                       LogOutoutFactory.append("(Log): "+"[Parser]: find Rinst "+op + " at line: " + opleft+"\n");  
+
                         RESULT = new RInstruction( opleft,
                                                    opright,
                                                    "SYSCALL",
@@ -1447,6 +1517,8 @@ class CUP$MipsParser$actions {
 		Integer rs = (Integer)((java_cup.runtime.Symbol) CUP$MipsParser$stack.peek()).value;
 		
                         System.out.println("[Parser]: find Rinst "+op + " at line: " + opleft);
+                       LogOutoutFactory.append("(Log): "+"[Parser]: find Rinst "+op + " at line: " + opleft+"\n");  
+
                         RESULT = new RInstruction( opleft,
                                                    opright,
                                                    "JR",
@@ -1468,6 +1540,8 @@ class CUP$MipsParser$actions {
 		String op = (String)((java_cup.runtime.Symbol) CUP$MipsParser$stack.peek()).value;
 		
                         System.out.println("[Parser]: find Rinst "+op + " at line: " + opleft);
+                       LogOutoutFactory.append("(Log): "+"[Parser]: find Rinst "+op + " at line: " + opleft+"\n");  
+
                         RESULT = new RInstruction( opleft,
                                                    opright,
                                                    "NOP",
@@ -1492,6 +1566,8 @@ class CUP$MipsParser$actions {
 		Object iol = (Object)((java_cup.runtime.Symbol) CUP$MipsParser$stack.peek()).value;
 		
                         System.out.println("[Parser]: find Jinst "+op + " at line: " + opleft);
+                       LogOutoutFactory.append("(Log): "+"[Parser]: find Jinst "+op + " at line: " + opleft +"\n");  
+
                         if( iol instanceof String ) {
                             RESULT = new JInstruction( opleft,
                                                        opright,

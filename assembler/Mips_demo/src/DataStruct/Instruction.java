@@ -4,6 +4,7 @@ import util.InstructionCode;
 public abstract class Instruction {
     //对机器码不同部分进行移位的位数
 	public static final int FUNCTSHIFT = 0;
+	public static final int SELSHIFT = 0;
     public static final int SHAMSHIFT = 6;
     public static final int RD_SHIFT = 11;
     public static final int RT_SHIFT = 16;
@@ -60,11 +61,11 @@ public abstract class Instruction {
         return label;
     }
 
-    public void setAddress( long a ) {
+    public void setOffset( long a ) {
         offset = a;
     }
 
-    public long getAddress() {
+    public long getOffset() {
         return offset;
     }
     

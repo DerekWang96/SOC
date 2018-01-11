@@ -1,5 +1,6 @@
 package DataStruct;
 import util.ImmProcessors;
+import util.LogOutoutFactory;
 
 public class JInstruction extends Instruction {
 
@@ -21,6 +22,7 @@ public class JInstruction extends Instruction {
         if( ! code.canHaveLabel ) {
             String msg = code.toString() + " on line: " + line;
             msg += " had a label. This operation does not take labels.";
+            LogOutoutFactory.append("(Error): "+msg+"\n");
             throw new Exception( msg );
         }
     }

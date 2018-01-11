@@ -1,8 +1,12 @@
 package DataStruct;
+
+import util.LogOutoutFactory;
+
 public class RInstruction extends Instruction {
     private int regsource;
     private int regtarget;
     private int regdest;
+    public String opname;
 
     public RInstruction( int line, int col, String opname, int rs, int rt, int rd, long shamt )
         throws Exception
@@ -11,9 +15,11 @@ public class RInstruction extends Instruction {
         regsource = rs;
         regtarget = rt;
         regdest = rd;
+        this.opname = opname;
         if( shamt > 32 ) {
             String msg = opname.toLowerCase() + " on line: " + line;
             msg += " is larger than 32, which cannot be encoded in 5 bits.";
+            LogOutoutFactory.append("(Error): "+msg+"\n");
             throw new Exception( msg );
         }
     }
@@ -27,7 +33,13 @@ public class RInstruction extends Instruction {
 
     public long getEncoded() {
         long inst = super.getEncoded();
-        long shamt = processImmediate() << SHAMSHIFT;
+        long shamt = 0;
+        if(opname.equals("MFC0")||opname.equals("MTC0")){
+        	shamt = processImmediate() << SELSHIFT;
+        }
+        else{
+        	shamt = processImmediate() << SHAMSHIFT;
+        }
         long rd = ( regdest << RD_SHIFT );
         long rt = ( regtarget << RT_SHIFT );
         long rs = ( regsource << RS_SHIFT );

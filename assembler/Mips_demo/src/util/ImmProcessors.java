@@ -11,6 +11,12 @@ public class ImmProcessors {
             return i & IMM5;
         }
     };
+    
+    public static final ImmediateProcessInterface SEL = new ImmediateProcessInterface() {
+        public long immProcessor( long i ) {
+            return i & IMM3;
+        }
+    };
 
     public static final ImmediateProcessInterface LOWER16 = new ImmediateProcessInterface() {
         public long immProcessor( long i ) {

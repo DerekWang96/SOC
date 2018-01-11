@@ -4,6 +4,7 @@ public class Label {
     private int colum;
     private String name;
     private long offset;
+    private long startAdress;
 
     public Label( int l, int c, String n, long o ) {
         line = l;
@@ -12,7 +13,15 @@ public class Label {
         offset = o;
     }
 
-    public int getLine() {
+    public long getStartAdress() {
+		return startAdress;
+	}
+
+	public void setStartAdress(long startAdress) {
+		this.startAdress = startAdress;
+	}
+
+	public int getLine() {
         return line;
     }
 

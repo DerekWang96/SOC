@@ -1,0 +1,635 @@
+import java_cup.runtime.Symbol;
+import java.util.*;
+import DataStruct.*;
+
+parser code {:
+    public void syntax_error( Symbol cur_token ) {
+        String msg  = "Syntax Error at line: " + (cur_token.left+1); 
+        msg         += " col: " + (cur_token.right+1) + ".";
+        report_error( msg, null );
+    }
+//    public void unrecovered_syntax_error( Symbol cur_token ) throws java.lang.Exception {
+//        super.unrecovered_syntax_error( cur_token );
+//    }
+:}
+
+terminal EOL;
+terminal COMMA;
+terminal COLON;
+terminal STARTDATA;
+terminal STARTTEXT;
+terminal LPAREN;
+terminal RPAREN;
+terminal String LABEL;
+
+// RFormat Operators
+terminal String ROPER;    
+terminal String RMDOPER;     
+terminal String RSOPER;      
+terminal String RTFOPER;    
+terminal String RTTOPER;    
+terminal String RSPOPER;    
+terminal String RJROPER;      
+terminal String BREAK;       
+terminal String SYSCALL;      
+terminal String ERET;         
+terminal String JALR; 
+terminal String NOP;             
+
+// IFormat Operators
+terminal String IOPER;
+terminal String IMEMOPER;
+terminal String IBRANCHOP;
+terminal String ISINGREGOP;
+
+// J format operators
+terminal String JOPER;
+
+terminal DASCIIZ;
+terminal DASCII;
+terminal DBYTE;
+terminal DHALFWORD;
+terminal DWORD;
+terminal DSPACE;
+terminal String STRLITERAL;
+//terminal Integer BYTE;
+//terminal Integer HALFWORD;
+terminal Integer REG;
+terminal Long IMM;
+
+/*------------------------------
+            Non Terminals
+------------------------------*/
+
+/**
+*  WHOLE MIPS PROGRAM
+*/
+non terminal goal;
+non terminal MipsAbstractSyntax mipsprogram;
+//non terminal section;
+non terminal DataSection datasection;
+non terminal DataSection data;
+non terminal DataDeclaration datadecl;
+non terminal DataItem dataasciiz;
+non terminal DataItem dataascii;
+non terminal DataItem databyte;
+non terminal DataItem datahalfword;
+non terminal DataItem dataword;
+non terminal DataItem dataspace;
+non terminal ArrayList<String> strlist;
+non terminal ArrayList<Long> immlist;
+/**
+*  TEXT SECTION
+*/
+non terminal TextSection textsection;
+non terminal TextSection textdata;
+
+
+// instructions
+//non terminal ArrayList<Instruction> instlist;
+non terminal Instruction mipsinst;
+non terminal RInstruction rinst;
+non terminal IInstruction iinst;
+non terminal JInstruction jinst;
+
+// Parts
+
+non terminal Label labeldecl;
+non terminal Object imm_or_label;
+
+start with goal;
+
+goal            ::= mipsprogram :m
+                    {:  RESULT = m; :}
+                ;
+/**                
+mipsprogram     ::= datasection:ds
+                    {:  RESULT = new MipsAbstractSyntax( ds ); :}
+                | 
+                textsection:ts
+                    {:  RESULT = new MipsAbstractSyntax( ts ); :}
+                |
+                datasection:ds textsection:ts
+                    {:  RESULT = new MipsAbstractSyntax( ds, ts ); :}
+                |
+                textsection:ts datasection:ds
+                    {:  RESULT = new MipsAbstractSyntax( ds, ts ); :}
+                ;
+*/
+
+
+mipsprogram     ::= mipsprogram:mas datasection:ds
+                {:  mas.dataSections.add(ds);
+                    RESULT = mas; :}   
+                |             
+                mipsprogram:mas textsection:ts
+                {:  mas.textSections.add(ts);
+                    RESULT = mas; :}
+                |
+                textsection:ts
+                {:  MipsAbstractSyntax mas = new MipsAbstractSyntax();
+                    mas.textSections.add(ts);
+                    RESULT = mas;  :}  
+                |
+                datasection:ds
+                {:  MipsAbstractSyntax mas = new MipsAbstractSyntax();
+                    mas.dataSections.add(ds);
+                    RESULT = mas;  :}
+                ;
+
+/**
+*  DATA SECTION GRAMMAR
+*/
+
+datasection     ::= STARTDATA EOL data:fulld
+                    {: System.out.println("[Parser]: find datasection " + " at line: " + fulldleft); 
+                      RESULT = fulld; :}
+                ;
+
+data            ::= data:ds datadecl:dc
+                    {:
+                        ds.addData( dc );
+                        RESULT = ds;
+                    :}
+                |
+                datadecl:dc
+                    {:
+                        DataSection ds = new DataSection();
+                        ds.addData( dc );
+                        RESULT = ds;
+                    :}                
+                ;
+datadecl        ::= LABEL:l COLON dataasciiz:d EOL
+                {: System.out.println("[Parser]: find data declaration "+l + " at line: " + lleft); 
+                   DataDeclaration decl = new DataDeclaration(l,lleft,lright );
+                   decl.addData(d);
+                   RESULT = decl;
+                :}
+                |LABEL:l COLON dataascii:d EOL
+                {: System.out.println("[Parser]: find data declaration "+l + " at line: " + lleft); 
+                   DataDeclaration decl = new DataDeclaration(l,lleft,lright );
+                   decl.addData(d);
+                   RESULT = decl;
+                :}
+                |LABEL:l COLON databyte:d EOL
+                {: System.out.println("[Parser]: find data declaration "+l + " at line: " + lleft); 
+                   DataDeclaration decl = new DataDeclaration(l,lleft,lright );
+                   decl.addData(d);
+                   RESULT = decl;
+                :}                
+                |LABEL:l COLON datahalfword:d EOL
+                {: System.out.println("[Parser]: find data declaration "+l + " at line: " + lleft); 
+                   DataDeclaration decl = new DataDeclaration(l,lleft,lright );
+                   decl.addData(d);
+                   RESULT = decl;
+                :}                
+                |LABEL:l COLON dataword:d EOL
+                {: System.out.println("[Parser]: find data declaration "+l + " at line: " + lleft); 
+                   DataDeclaration decl = new DataDeclaration(l,lleft,lright );
+                   decl.addData(d);
+                   RESULT = decl;
+                :}
+                |LABEL:l COLON dataspace:d EOL
+                {: System.out.println("[Parser]: find data declaration "+l + " at line: " + lleft); 
+                   DataDeclaration decl = new DataDeclaration(l,lleft,lright );
+                   decl.addData(d);
+                   RESULT = decl;
+                :}
+                |datadecl:decl dataasciiz:d EOL
+                {: decl.addData(d);
+                   RESULT = decl;
+                :}
+                 |datadecl:decl databyte:d EOL
+                {: decl.addData(d);
+                   RESULT = decl;
+                :} 
+                 |datadecl:decl dataascii:d EOL
+                {: decl.addData(d);
+                   RESULT = decl;
+                :} 
+                |datadecl:decl datahalfword:d EOL
+                {: decl.addData(d);
+                   RESULT = decl;
+                :}                 
+                |datadecl:decl dataword:d EOL
+                {: decl.addData(d);
+                   RESULT = decl;
+                :} 
+                |datadecl:decl dataspace:d EOL
+                {: decl.addData(d);
+                   RESULT = decl;
+                :}                 
+                ;
+dataasciiz      ::= DASCIIZ strlist:s
+                    {: System.out.println("[Parser]: find data "+s + " at line: " + sleft);  
+                      RESULT = new DataItem( sleft, sright, s, true ); :}
+                ;
+dataascii      ::=  DASCII strlist:s
+                    {:System.out.println("[Parser]: find data "+s + " at line: " + sleft);  
+                    RESULT = new DataItem( sleft, sright, s, false ); :}
+                ;
+databyte        ::= DBYTE immlist:i
+                    {:System.out.println("[Parser]: find data "+i + " at line: " + ileft); 
+                     RESULT = new DataItem( ileft, iright, i, 8 ); :}
+                ;
+datahalfword    ::= DHALFWORD immlist:i
+                    {:System.out.println("[Parser]: find data "+i + " at line: " + ileft);  
+                    RESULT = new DataItem( ileft, iright, i, 16 ); :}
+                ;
+dataword        ::= DWORD immlist:i
+                    {:System.out.println("[Parser]: find data "+i + " at line: " + ileft);  
+                    RESULT = new DataItem( ileft, iright, i, 32 ); :}
+                ;
+dataspace       ::= DSPACE IMM:i
+                    {:System.out.println("[Parser]: find data "+i + " at line: " + ileft);  
+                    RESULT = new DataItem( ileft, iright, (int)i.longValue() ); :}
+                ;                
+
+/*************
+datadecl        ::= dataasciiz:d EOL {: RESULT = d; :}
+                |
+                dataascii:d EOL {: RESULT = d; :}
+                |
+                databyte:d EOL {: RESULT = d; :}
+                |
+                datahalfword:d EOL {: RESULT = d; :}
+                |
+                dataword:d EOL {: RESULT = d; :}
+                |
+                dataspace:d EOL {: RESULT = d; :}
+                ;
+dataasciiz      ::= LABEL:l COLON DASCIIZ strlist:s
+                    {: System.out.println("[Parser]: find data "+l + " at line: " + lleft);  
+                      RESULT = new DataItem( lleft, lright, l, s, true ); :}
+                ;
+dataascii      ::= LABEL:l COLON DASCII strlist:s
+                    {:System.out.println("[Parser]: find data "+l + " at line: " + lleft);  
+                    RESULT = new DataItem( lleft, lright, l, s, false ); :}
+                ;
+databyte        ::= LABEL:l COLON DBYTE immlist:list
+                    {:System.out.println("[Parser]: find data "+l + " at line: " + lleft); 
+                     RESULT = new DataItem( lleft, lright, l, list, 8 ); :}
+                ;
+datahalfword    ::= LABEL:l COLON DHALFWORD immlist:list
+                    {:System.out.println("[Parser]: find data "+l + " at line: " + lleft);  
+                    RESULT = new DataItem( lleft, lright, l, list, 16 ); :}
+                ;
+dataword        ::= LABEL:l COLON DWORD immlist:list
+                    {:System.out.println("[Parser]: find data "+l + " at line: " + lleft);  
+                    RESULT = new DataItem( lleft, lright, l, list, 32 ); :}
+                ;
+dataspace       ::= LABEL:l COLON DSPACE IMM:i
+                    {:System.out.println("[Parser]: find data "+l + " at line: " + lleft);  
+                    RESULT = new DataItem( lleft, lright, l, (int)i.longValue() ); :}
+                ;
+*************/
+strlist         ::= strlist:list COMMA STRLITERAL:s
+                    {: list.add(s); RESULT = list; :}
+                |
+                STRLITERAL:s
+                    {: ArrayList<String> l = new ArrayList<String>(); l.add(s); RESULT = l; :}
+                ;
+immlist         ::= immlist:list COMMA IMM:i
+                    {: list.add(i); RESULT = list; :}
+                |
+                IMM:i
+                    {: ArrayList<Long> l = new ArrayList<Long>(); l.add(i); RESULT = l; :}
+                ;
+
+/**
+*  TEXT SECTION GRAMMAR
+*/
+
+textsection     ::= STARTTEXT EOL textdata:tdfull
+                    {:  System.out.println("[Parser]: find text section " + " at line: " + tdfullleft); 
+                      RESULT = tdfull; :}
+                |
+                STARTTEXT IMM:i EOL textdata:tdfull
+                    {: System.out.println("[Parser]: find text section " + " at line: " + ileft); 
+                    tdfull.setAddress(i);
+                    RESULT = tdfull; :}
+                ;
+
+textdata        ::= textdata:td mipsinst:i
+                    {:  td.addInstruction( i );
+                        RESULT = td;
+                    :}
+                |
+                textdata:td labeldecl:l
+                    {:  td.addLabel( l );
+                        RESULT = td;
+                    :}
+                |
+                textdata:td labeldecl:l EOL
+                    {:  td.addLabel( l );
+                        RESULT = td;
+                    :}
+                |
+                mipsinst:i
+                    {:  TextSection t = new TextSection(); 
+                        t.addInstruction( i );
+                        RESULT = t;
+                    :}
+                |
+                labeldecl:l
+                    {:  TextSection t = new TextSection(); 
+                        t.addLabel( l );
+                        RESULT = t;
+                    :}
+                    |
+                labeldecl:l EOL
+                    {:  TextSection t = new TextSection(); 
+                        t.addLabel( l );
+                        RESULT = t;
+                    :}
+                ;
+
+labeldecl       ::= LABEL:l COLON
+                    {:
+                        System.out.println("[Parser]: find var|subpro declaration "+l + " at line: " + lleft);
+                        RESULT = new Label( lleft, lright, l, 0 );
+                    :}
+                ;
+
+mipsinst        ::= rinst:ri EOL             // Instruction
+                    {: RESULT = ri; :}
+                |
+                iinst:ii EOL
+                    {: RESULT = ii; :}
+                |
+                jinst:ji EOL
+                    {: RESULT = ji; :}
+                ;
+
+
+imm_or_label    ::= IMM:imm
+                    {: RESULT = imm; :}
+                |
+                LABEL:label
+                    {: RESULT = label; :}
+                ;
+
+iinst           ::= IOPER:op REG:rt COMMA REG:rs COMMA imm_or_label:iol
+                    {:
+                        System.out.println("[Parser]: find Iinst "+op + " at line: " + opleft);
+                        if( iol instanceof String ) {
+                            RESULT = new IInstruction( opleft,
+                                                       opright,
+                                                       op.toUpperCase(),
+                                                       rs.intValue(),
+                                                       rt.intValue(),
+                                                       (String)iol );
+                        } else if ( iol instanceof Long ) {
+                            RESULT = new IInstruction( opleft,
+                                                       opright,
+                                                       op.toUpperCase(),
+                                                       rs.intValue(),
+                                                       rt.intValue(),
+                                                       ((Long)iol).longValue() );
+                        }
+                    :}
+
+                |IBRANCHOP:op REG:rs COMMA REG:rt COMMA imm_or_label:iol
+                    {:
+                        System.out.println("[Parser]: find Iinst "+op + " at line: " + opleft);
+                        if( iol instanceof String ) {
+                            RESULT = new IInstruction( opleft,
+                                                       opright,
+                                                       op.toUpperCase(),
+                                                       rs.intValue(),
+                                                       rt.intValue(),
+                                                       (String)iol );
+                        } else if ( iol instanceof Long ) {
+                            RESULT = new IInstruction( opleft,
+                                                       opright,
+                                                       op.toUpperCase(),
+                                                       rs.intValue(),
+                                                       rt.intValue(),
+                                                       ((Long)iol).longValue() );
+                        }
+                        if( RESULT == null ) System.err.println( "RESULT NOT SET" );
+                    :}
+                |IMEMOPER:op REG:rt COMMA imm_or_label:iol LPAREN REG:rs RPAREN
+                    {:
+                        System.out.println("[Parser]: find Iinst "+op + " at line: " + opleft);
+                        if( iol instanceof String ) {
+                            RESULT = new IInstruction( opleft,
+                                                       opright,
+                                                       op.toUpperCase(),
+                                                       rs.intValue(),
+                                                       rt.intValue(),
+                                                       (String)iol );
+                        } else if ( iol instanceof Long ) {
+                            RESULT = new IInstruction( opleft,
+                                                       opright,
+                                                       op.toUpperCase(),
+                                                       rs.intValue(),
+                                                       rt.intValue(),
+                                                       ((Long)iol).longValue() );
+                        }
+                        if( RESULT == null ) System.err.println( "RESULT NOT SET" );
+                    :}
+                |
+                ISINGREGOP:op REG:reg COMMA imm_or_label:iol
+                    {:
+                        System.out.println("[Parser]: find Iinst "+op + " at line: " + opleft);
+                        int rsNum = 0;
+                        int rtNum = 0;
+                        switch(op){
+                        case "lui": 
+                        rsNum = 0;
+                        rtNum = reg.intValue();
+                        break;
+                        case "bgtz": case "blez":case "bltz":
+                        rsNum = reg.intValue();
+                        rtNum = 0;
+                        break;
+                        case "bgez": 
+                        rsNum = reg.intValue();
+                        rtNum = 1;
+                        break; 
+                        case "bgezal": 
+                        rsNum = reg.intValue();
+                        rtNum = 17;
+                        break; 
+                        case "bltzal": 
+                        rsNum = reg.intValue();
+                        rtNum = 16;
+                        break;                         
+                        }
+                        if( iol instanceof String ) {
+                            RESULT = new IInstruction( opleft,
+                                                       opright,
+                                                       op.toUpperCase(),
+                                                       rsNum,
+                                                       rtNum,
+                                                       (String)iol );
+                        } else if ( iol instanceof Long ) {
+                            RESULT = new IInstruction( opleft,
+                                                       opright,
+                                                       op.toUpperCase(),
+                                                       rsNum,
+                                                       rtNum,
+                                                       ((Long)iol).longValue() );
+                        }
+                    :}
+                ;
+
+rinst           ::= ROPER:op REG:rd COMMA REG:rs COMMA REG:rt
+                    {:
+                        System.out.println("[Parser]: find Rinst "+op + " at line: " + opleft);                      
+                        RESULT = new RInstruction( opleft,
+                                                   opright,
+                                                   op.toUpperCase(),
+                                                   rs.intValue(),
+                                                   rt.intValue(),
+                                                   rd.intValue(),
+                                                   0 );
+                    :}
+                |RMDOPER:op REG:rt COMMA REG:rs 
+                    {:
+                        System.out.println("[Parser]: find Rinst "+op + " at line: " + opleft);
+                        RESULT = new RInstruction( opleft,
+                                                   opright,
+                                                   op.toUpperCase(),
+                                                   rs.intValue(),
+                                                   rt.intValue(),
+                                                   0,
+                                                   0
+                                                  );
+                    :}
+
+                |RSOPER:op REG:rt COMMA REG:rd COMMA IMM:shamt
+                    {:
+                        System.out.println("[Parser]: find Rinst "+op + " at line: " + opleft);
+                        RESULT = new RInstruction( opleft,
+                                                   opright,
+                                                   op.toUpperCase(),
+                                                   0,
+                                                   rt.intValue(),
+                                                   rd.intValue(),
+                                                   shamt.longValue() );
+                    :}
+                |RTFOPER:op REG:rd
+                    {:  
+                        System.out.println("[Parser]: find Rinst "+op + " at line: " + opleft);
+                        RESULT = new RInstruction( opleft,
+                                                   opright,
+                                                   op.toUpperCase(),
+                                                   0,
+                                                   0,
+                                                   rd.intValue(),
+                                                   0
+                                                    );
+                    :}
+
+                |RTTOPER:op REG:rs
+                    {:  
+                        System.out.println("[Parser]: find Rinst "+op + " at line: " + opleft);
+                        RESULT = new RInstruction( opleft,
+                                                   opright,
+                                                   op.toUpperCase(),
+                                                   0,
+                                                   rs.intValue(),
+                                                   0,
+                                                   0
+                                                  );
+                    :}
+
+                |RSPOPER:op REG:rt COMMA REG:rd
+                    {:
+                        System.out.println("[Parser]: find Rinst "+op + " at line: " + opleft);
+                        RESULT = new RInstruction( opleft,
+                                                   opright,
+                                                   op.toUpperCase(),
+                                                   0,
+                                                   rt.intValue(),
+                                                   rd.intValue(),
+                                                   0
+                                                  );
+                    :}
+                |ERET:op
+                    {:
+                        System.out.println("[Parser]: find Rinst "+op + " at line: " + opleft);
+                        RESULT = new RInstruction( opleft,
+                                                   opright,
+                                                   "ERET",
+                                                   16,
+                                                   0,
+                                                   0,
+                                                   0 );
+                   :}                
+                |BREAK:op
+                    {:
+                        System.out.println("[Parser]: find Rinst "+op + " at line: " + opleft);
+                        RESULT = new RInstruction( opleft,
+                                                   opright,
+                                                   "BREAK",
+                                                   0,
+                                                   0,
+                                                   0,
+                                                   0 );
+                   :}
+                |JALR:op REG:rs COMMA REG:rd 
+                    {:
+                        System.out.println("[Parser]: find Rinst "+op + " at line: " + opleft);
+                        RESULT = new RInstruction( opleft,
+                                                   opright,
+                                                   op.toUpperCase(),
+                                                   rs.intValue(),
+                                                   0,
+                                                   rd.intValue(),
+                                                   0
+                                                  );
+                    :}
+
+                |SYSCALL:op
+                    {:
+                        System.out.println("[Parser]: find Rinst "+op + " at line: " + opleft);
+                        RESULT = new RInstruction( opleft,
+                                                   opright,
+                                                   "SYSCALL",
+                                                   0,
+                                                   0,
+                                                   0,
+                                                   0 );
+                   :}
+                |RJROPER:op REG:rs
+                    {:
+                        System.out.println("[Parser]: find Rinst "+op + " at line: " + opleft);
+                        RESULT = new RInstruction( opleft,
+                                                   opright,
+                                                   "JR",
+                                                   rs.intValue(),
+                                                   0,
+                                                   0,
+                                                   0 );
+                   :}
+                |NOP:op
+                    {:
+                        System.out.println("[Parser]: find Rinst "+op + " at line: " + opleft);
+                        RESULT = new RInstruction( opleft,
+                                                   opright,
+                                                   "NOP",
+                                                   0,
+                                                   0,
+                                                   0,
+                                                   0 );
+                   :}
+                ;
+jinst           ::= JOPER:op imm_or_label:iol
+                    {:
+                        System.out.println("[Parser]: find Jinst "+op + " at line: " + opleft);
+                        if( iol instanceof String ) {
+                            RESULT = new JInstruction( opleft,
+                                                       opright,
+                                                       op.toUpperCase(),
+                                                       (String)iol );
+                        } else if ( iol instanceof Long ) {
+                            RESULT = new JInstruction( opleft,
+                                                       opright,
+                                                       op.toUpperCase(),
+                                                       ((Long)iol).longValue() );
+                        }
+                    :}
+                ;

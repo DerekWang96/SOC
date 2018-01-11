@@ -1,6 +1,6 @@
 package util;
 public enum InstructionCode {
-//包含了指令转换为机器码的所有可能用到的属性，在指令和立即数的格式化时，使用了接口
+//包含了指令转换为机器码的所有可能用到的属性，在指令和立即数的格式化时，使用了interface
 //*****R-instructions*******
     //-------RFMT--------------
 	ADD ((byte)0x0, (byte)0x20, false, InstFormatters.RFMT, ImmProcessors.NONE ),
@@ -9,9 +9,10 @@ public enum InstructionCode {
     SUBU ((byte)0x0, (byte)0x23, false, InstFormatters.RFMT, ImmProcessors.NONE ),  
     AND ((byte)0x0, (byte)0x24, false, InstFormatters.RFMT, ImmProcessors.NONE ),
     OR ((byte)0x0, (byte)0x25, false, InstFormatters.RFMT, ImmProcessors.NONE ),
-    NOR ((byte)0x0, (byte)0x26, false, InstFormatters.RFMT, ImmProcessors.NONE ),
-    XOR ((byte)0x0, (byte)0x27, false, InstFormatters.RFMT, ImmProcessors.NONE ),
+    NOR ((byte)0x0, (byte)0x27, false, InstFormatters.RFMT, ImmProcessors.NONE ),
+    XOR ((byte)0x0, (byte)0x26, false, InstFormatters.RFMT, ImmProcessors.NONE ),
     SLT ((byte)0x0, (byte)0x2a, false, InstFormatters.RFMT, ImmProcessors.NONE ),
+    SLTU ((byte)0x0, (byte)0x2b, false, InstFormatters.RFMT, ImmProcessors.NONE ),
     SLLV ((byte)0x0, (byte)0x04, false, InstFormatters.RFMT, ImmProcessors.NONE ),
     SRLV ((byte)0x0, (byte)0x06, false, InstFormatters.RFMT, ImmProcessors.NONE ),
     SRAV ((byte)0x0, (byte)0x07, false, InstFormatters.RFMT, ImmProcessors.NONE ),     
@@ -32,10 +33,13 @@ public enum InstructionCode {
     SRL ((byte)0x0, (byte)0x2, true, InstFormatters.SHIFTFMT, ImmProcessors.SHAMT ),
     SRA ((byte)0x0, (byte)0x3, true, InstFormatters.SHIFTFMT, ImmProcessors.SHAMT ),
     //-------SYSFMT--------------
-    ERET ((byte)0x0, (byte)0xd, false, InstFormatters.SYSFMT, ImmProcessors.NONE ),
+    ERET ((byte)0x0, (byte)0x18, false, InstFormatters.SYSFMT, ImmProcessors.NONE ),
     SYSCALL ((byte)0x0, (byte)0xc, false, InstFormatters.SYSFMT, ImmProcessors.NONE ),
-    BREAK ((byte)0x0, (byte)0x18, false, InstFormatters.SYSFMT, ImmProcessors.NONE ),
+    BREAK ((byte)0x0, (byte)0xd, false, InstFormatters.SYSFMT, ImmProcessors.NONE ),
     NOP ((byte)0x0, (byte)0x0, false, InstFormatters.SYSFMT, ImmProcessors.NONE ),
+    //-------------------------------
+    MFC0 ((byte)0x10, (byte)0x00, false, InstFormatters.SHIFTFMT, ImmProcessors.SEL ),
+    MTC0 ((byte)0x10, (byte)0x00, false, InstFormatters.SHIFTFMT, ImmProcessors.SEL ),
 //*****I-instructions*******
     //-------IFMT--------------
     ADDI ((byte)0x8, (byte)0x0, true, InstFormatters.IFMT, ImmProcessors.LOWER16 ),
@@ -58,7 +62,7 @@ public enum InstructionCode {
     SB ((byte)0x2b, (byte)0x0, true, InstFormatters.IMEMFMT, ImmProcessors.LOWER16 ),
     SH ((byte)0x2b, (byte)0x0, true, InstFormatters.IMEMFMT, ImmProcessors.LOWER16 ),
     //-------ISINGLETREG--------------
-    LUI ((byte)0xf, (byte)0x0, true, InstFormatters.ISINGLETREG, ImmProcessors.UPPER16 ),
+    LUI ((byte)0xf, (byte)0x0, true, InstFormatters.ISINGLETREG, ImmProcessors.LOWER16 ),
     //-------ISINGLETREG--------------
     BGEZ ((byte)0x1, (byte)0x0, true, InstFormatters.ISINGLESREG, ImmProcessors.JUMP ),
     BGTZ ((byte)0x7, (byte)0x0, true, InstFormatters.ISINGLESREG, ImmProcessors.JUMP ),

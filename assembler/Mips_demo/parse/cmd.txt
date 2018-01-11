@@ -1,0 +1,1 @@
+ java java_cup.Main <  C:\Users\Õ¹Åô\Desktop\parse\MipsParser.cup  -parser MipsParser -dump

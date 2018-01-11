@@ -2,6 +2,8 @@ package DataStruct;
 
 import java.util.*;
 
+import util.LogOutoutFactory;
+
 public class DataSection {
 	public ArrayList<DataDeclaration> dataDeclarations;
 	public Hashtable<String, Label> symtable  ;
@@ -21,15 +23,19 @@ public class DataSection {
 
 	public void addData(DataDeclaration d) throws Exception {
 //		System.out.println("adding data.  "+ symtable.containsKey(d.lable));
-		if (symtable.containsKey(d.lable)) {
+		if (symtable.containsKey(d.lable)) {			
+			LogOutoutFactory.append("(Error): "+ d.lable + " was declared more than once (in data section).\n");
 			throw new Exception(d.lable + " was declared more than once (in data section).");
 		}
 		 d.setStartAddress( next_free );
-		 next_free += d.getLength();
-		 System.out.println("data length: "+ d.getLength());
-		 int danglingBytes = (int)(next_free % 4L); //保证边界对齐
+		 next_free += d.data.size();
+		 
+		 int danglingBytes = (int)(next_free % 4L); //保证边界对齐，即两个数据声明不能在同一个字里，即使不够一个字也不行
 		 if( danglingBytes > 0 ) {
 		 next_free += ( 4 - danglingBytes );
+		 for(int i = 0; i <(4- danglingBytes); i++){
+			 d.data.add(new Byte( (byte)0 ));
+		 	}
 		 }
 		dataDeclarations.add(d);
 		symtable.put(d.lable, new Label(d.getLine(), d.getColum(), d.lable, d.getStartAddress()));
